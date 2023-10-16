@@ -1,4 +1,4 @@
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row } from 'react-bootstrap'
 import restaurantsService from '../services/restaurants.services'
 import { useEffect, useState } from 'react'
 import RestaurantList from '../components/RestaurantsList/RestaurantList'

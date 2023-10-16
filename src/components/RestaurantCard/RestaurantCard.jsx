@@ -1,4 +1,4 @@
-import { Card, Button } from "react-bootstrap"
+import { Card } from "react-bootstrap"
 import { Link } from "react-router-dom"
 
 import './RestaurantCard.css'
@@ -6,7 +6,7 @@ import './RestaurantCard.css'
 const RestaurantCard = ({ name, imageUrl, _id }) => {
     return (
         <Card className="mb-3 RestaurantCard">
-            <Card.Img variant="top" src={imageUrl} />
+            <Card.Img variant="top" src={imageUrl} alt={name} />
             <Card.Body>
                 <Card.Title>{name}</Card.Title>
                 <div className="d-grid">

@@ -71,7 +71,7 @@ const RestaurantDetailsPage = () => {
                             </Col>
 
                             <Col md={{ span: 4 }}>
-                                <img src={restaurant.imageUrl} style={{ width: '100%' }} />
+                                <img src={restaurant.imageUrl} style={{ width: '100%' }} alt={restaurant.name} />
                             </Col>
 
                         </Row>
