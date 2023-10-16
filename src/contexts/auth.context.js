@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import { createContext, useEffect, useState } from "react"
 import authService from "../services/auth.services"
 
