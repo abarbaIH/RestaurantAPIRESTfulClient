@@ -2,6 +2,8 @@ import { useState } from "react"
 import { Form, Button, Row, Col } from "react-bootstrap"
 import restaurantsService from "../../services/restaurants.services"
 import { useNavigate } from "react-router-dom"
+import FormError from "../FormError/FormError"
+
 
 const NewRestaurantForm = () => {
 
@@ -11,6 +13,8 @@ const NewRestaurantForm = () => {
         phone: "",
         imageUrl: ""
     })
+
+    const [errors, setErrors] = useState([])
 
     const handleInputChange = (e) => {
         const { name, value } = e.target
@@ -26,7 +30,9 @@ const NewRestaurantForm = () => {
         restaurantsService
             .saveRestaurant(restaurantData)
             .then(() => navigate('/gallery'))
-            .catch(err => console.log(err))
+            .catch(err => {
+                setErrors(err.response.data.errorMessages)
+            })
     }
 
     return (
@@ -56,6 +62,8 @@ const NewRestaurantForm = () => {
                 <Form.Label>Imagen (URL)</Form.Label>
                 <Form.Control type="text" value={restaurantData.imageUrl} name="imageUrl" onChange={handleInputChange} />
             </Form.Group>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
             <div className="d-grid mt-3">
                 <Button variant="dark" type="submit">Crear Restaurante</Button>

@@ -2,6 +2,7 @@ import { useState } from "react"
 import { Form, Button } from "react-bootstrap"
 import authService from './../../services/auth.services'
 import { useNavigate } from "react-router-dom"
+import FormError from "../FormError/FormError"
 
 const SignupForm = () => {
 
@@ -11,7 +12,11 @@ const SignupForm = () => {
         password: ''
     })
 
+    const [errors, setErrors] = useState([])
+
+
     const navigate = useNavigate()
+
 
     const handleInputChange = e => {
         const { value, name } = e.target
@@ -23,8 +28,12 @@ const SignupForm = () => {
 
         authService
             .signup(signupData)
-            .then(({ data }) => navigate('/gallery'))
-            .catch(err => console.log(err))
+            .then(({ data }) => {
+                navigate('/')
+            })
+            .catch(err => setErrors(err.response.data.errorMessages))
+
+        navigate('/login')
     }
 
 
@@ -55,6 +64,8 @@ const SignupForm = () => {
             <div className="d-grid">
                 <Button variant="dark" type="submit">Registrarme</Button>
             </div>
+
+            {errors.length > 0 && <FormError>{errors.map(elm => <p>{elm}</p>)}</FormError>}
 
         </Form>
     )
