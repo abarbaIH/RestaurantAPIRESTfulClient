@@ -1,16 +1,41 @@
 import { Route, Routes } from 'react-router-dom'
+import RestaurantsListPage from '../pages/RestaurantsListPage'
+import RestaurantDetailsPage from '../pages/RestaurantDetailsPage'
+import NewRestaurantPage from '../pages/NewRestaurantPage'
+import SignupPage from '../pages/SignupPage'
+import LoginPage from '../pages/LoginPage'
+import HomePage from '../pages/HomePage'
+import ProfilePage from '../pages/ProfilePage'
+import PrivateRoute from './PrivateRoute'
+import EditRestaurantPage from '../pages/EditRestaurantPage'
+
 
 const AppRoutes = () => {
     return (
         <Routes>
-            <Route path='/' element={<h1>INICIO</h1>} />
-            <Route path='/gallery' element={<h1>GALERIA</h1>} />
-            <Route path='/create' element={<h1>CREAR RESTAURANTE</h1>} />
-            <Route path='/details/:restaurant_id' element={<h1>DETALLES RESTAURANTE</h1>} />
-            <Route path='/signup' element={<h1>REGITRO</h1>} />
-            <Route path='/login' element={<h1>INICIO SESION</h1>} />
-            <Route path='/profile' element={<h1>PERFIL</h1>} />
-            <Route path='*' element={<h1>PERFIL</h1>} />
+            <Route path='/' element={<HomePage />} />
+            <Route path='/gallery' element={<RestaurantsListPage />} />
+            <Route path='/signup' element={<SignupPage />} />
+            <Route path='/login' element={<LoginPage />} />
+
+            <Route path="/create" element={<PrivateRoute />}>
+                <Route path="" element={<NewRestaurantPage />} />
+            </Route>
+
+
+            <Route path="/editar/:restaurant_id" element={<PrivateRoute />}>
+                <Route path="" element={<EditRestaurantPage />} />
+            </Route>
+
+            <Route path="/details/:restaurant_id" element={<PrivateRoute />}>
+                <Route path="" element={<RestaurantDetailsPage />} />
+            </Route>
+
+            <Route path="/profile" element={<PrivateRoute />}>
+                <Route path="" element={<ProfilePage />} />
+            </Route>
+
+            <Route path='*' element={<h1>404</h1>} />
         </Routes>
     )
 }
